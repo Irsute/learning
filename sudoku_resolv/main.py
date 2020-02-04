@@ -15,6 +15,7 @@ board = [
 
 # function to print the board
 def print_board(bo):
+    print ("*******************")
     for i in range(len(bo)):
         if i % 3 == 0 and i != 0:
             print("- - - - - - - - - - -")
@@ -25,6 +26,7 @@ def print_board(bo):
                 print(str(bo[i][j]))
             else:
                 print(str(bo[i][j]) + " ", end="")
+    print("*******************")
 
 
 # function to retrieve case @ 0
@@ -56,6 +58,20 @@ def valid(bo, num, pos):
             if i // 3 == x and j // 3 == y:
                 if bo[i][j] == num:
                     return False
+    return True
 
 
-print_board(board)
+def fill_empty(bo):
+    while find_empty(bo):
+        pos = find_empty(bo)
+        val = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        for num in val:
+            if valid(bo, num, pos):
+                bo[pos[0]][pos[1]] = num
+                fill_empty(bo)
+            system('clear')
+            print_board(bo)
+
+
+if __name__ == '__main__':
+    fill_empty(board)
