@@ -15,7 +15,7 @@ board = [
 
 # function to print the board
 def print_board(bo):
-    print ("*******************")
+    print ("*********************")
     for i in range(len(bo)):
         if i % 3 == 0 and i != 0:
             print("- - - - - - - - - - -")
@@ -26,10 +26,10 @@ def print_board(bo):
                 print(str(bo[i][j]))
             else:
                 print(str(bo[i][j]) + " ", end="")
-    print("*******************")
+    print("*********************")
 
 
-# function to retrieve case @ 0
+# function to retrieve case with 0
 def find_empty(bo):
     for i in range(len(bo)):
         for j in range(len(bo[0])):
@@ -62,14 +62,15 @@ def valid(bo, num, pos):
 
 
 def fill_empty(bo):
-    while find_empty(bo):
-        pos = find_empty(bo)
-        val = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    pos = find_empty(bo)
+    val = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    if pos:
+        pos_back = pos
         for num in val:
             if valid(bo, num, pos):
                 bo[pos[0]][pos[1]] = num
                 fill_empty(bo)
-            system('clear')
+#            system('clear')
             print_board(bo)
 
 
