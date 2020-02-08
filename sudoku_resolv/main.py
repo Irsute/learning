@@ -15,7 +15,7 @@ board = [
 
 # function to print the board
 def print_board(bo):
-    print ("*********************")
+    print("*********************")
     for i in range(len(bo)):
         if i % 3 == 0 and i != 0:
             print("- - - - - - - - - - -")
@@ -62,17 +62,22 @@ def valid(bo, num, pos):
 
 
 def fill_empty(bo):
-    pos = find_empty(bo)
-    val = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    if pos:
-        pos_back = pos
-        for num in val:
-            if valid(bo, num, pos):
-                bo[pos[0]][pos[1]] = num
-                fill_empty(bo)
-#            system('clear')
-            print_board(bo)
+    if not find_empty(bo):
+        return True
+    else:
+        pos = find_empty(bo)
+        for index in range(1, 10):
+            if valid(bo, index, pos):
+                bo[pos[0]][pos[1]] = index
+
+                if fill_empty(bo):
+                    return True
+
+            bo[pos[0]][pos[1]] = 0
+    return False
 
 
 if __name__ == '__main__':
+    print_board(board)
     fill_empty(board)
+    print_board(board)
